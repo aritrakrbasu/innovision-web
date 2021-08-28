@@ -124,3 +124,12 @@
 	-webkit-animation: move-clouds-back 200s linear infinite;
 	animation: move-clouds-back 200s linear infinite;
   }
+
+  body::-webkit-scrollbar-track {
+	background: red;
+  }
+  body::-webkit-scrollbar-thumb {
+	background-color: red;
+	border-radius: 6px;
+	border: 3px solid red;
+  }

@@ -6,6 +6,7 @@ import techc from './posters/techc.jpeg'
 import { Col, Container, Row } from 'react-bootstrap'
 import { db } from './firebase'
 import { Link } from 'react-router-dom'
+import Navbar from './components/Navbar'
 
 function Explode() {
 
@@ -61,25 +62,7 @@ function Explode() {
 		<div class="twinkling"></div>
 		<div class="clouds" style={{ backgroundImage: `url(${cloud})` }}></div>
 
-		<div className="frame__nav">
-			<ul>
-				<li>
-					<a href="/events">
-						<button class="navigation__button">About Innovision</button>
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<button class="navigation__button">The Team</button>
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<button class="navigation__button">Contact Us</button>
-					</a>
-				</li>
-			</ul>
-		</div>
+		<Navbar />
 		
         <div id="container"></div>
 			<div class="frame">

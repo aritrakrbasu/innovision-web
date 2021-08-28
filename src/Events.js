@@ -21,8 +21,6 @@ function Events() {
         return unsubscribe
     }, [])
 
-    console.log(eventsData)
-
     return (
 
         <>

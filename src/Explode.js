@@ -64,11 +64,6 @@ function Explode() {
 		<div className="frame__nav">
 			<ul>
 				<li>
-					<a href="/events">
-						<button class="navigation__button">About Innovision</button>
-					</a>
-				</li>
-				<li>
 					<a href="#">
 						<button class="navigation__button">The Team</button>
 					</a>
@@ -76,6 +71,16 @@ function Explode() {
 				<li>
 					<a href="#">
 						<button class="navigation__button">Contact Us</button>
+					</a>
+				</li>
+				<li>
+					<a href="/login">
+						<button class="navigation__button">Login</button>
+					</a>
+				</li>
+				<li>
+					<a href="/register">
+						<button class="navigation__button">Register</button>
 					</a>
 				</li>
 			</ul>

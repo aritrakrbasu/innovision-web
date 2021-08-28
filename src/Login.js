@@ -2,6 +2,7 @@ import React,{useEffect,useRef,useState} from 'react'
 import { Spinner } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 import cloud from './cloud.png'
+import logo from './logo.png'
 import { useAuth } from './context/AuthProvider'
 
 function Login() {
@@ -44,11 +45,38 @@ function Login() {
     return (
         <div>
             <div class="stars"></div>
-		<div class="twinkling"></div>
-		<div class="clouds" style={{ backgroundImage: `url(${cloud})` }}></div>
+            <div class="twinkling"></div>
+            <div class="clouds" style={{ backgroundImage: `url(${cloud})` }}></div>
+
+            <div className="frame__nav">
+			<ul>
+				<li>
+					<a href="/">
+						<button class="navigation__button">Home</button>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<button class="navigation__button">The Team</button>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<button class="navigation__button">Contact Us</button>
+					</a>
+				</li>
+                <li>
+					<a href="/register">
+						<button class="navigation__button">Register</button>
+					</a>
+				</li>
+			</ul>
+		</div>
+
 
             <div className="registration_form_holder">
-                <form class="registration_form">
+                <form class="registration_form" style={{padding: '10px'}}>
+                    <img src={logo} style={{position:'relative', zIndex: '999999999', margin: '85px auto'}} width={250}/>
                     <input type="text" placeholder="Email Id" ref={emailRef}/>
                     <input type="password" placeholder="Password" ref={passwordRef}/>
                     <center>

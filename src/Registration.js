@@ -1,8 +1,9 @@
-import React, { useState,useRef } from 'react'
+import React, { useState,useRef, useEffect } from 'react'
 import './styles/registrations.css'
 import logo from './logo_card.png'
 import mail from './mail.png'
 import cloud from './cloud.png'
+import profilePicDefault from './profileDefault.jpg'
 import { useAuth } from './context/AuthProvider'
 import { useHistory } from 'react-router-dom'
 import { Spinner } from 'react-bootstrap'
@@ -18,8 +19,15 @@ function Registration() {
     const emailRef = useRef()
     const phonenumberRef = useRef()
     const nameRef = useRef()
-    const { createUser } = useAuth()
+    const { createUser, currentUser } = useAuth()
     const history = useHistory()
+
+    useEffect(()=>{
+        if(currentUser && currentUser.uid)
+        {
+            history.push("/dashboard")
+        }
+    },[currentUser])
 
     function uploadImage(e)
     {
@@ -76,8 +84,8 @@ function Registration() {
         <div className="frame__nav">
 			<ul>
 				<li>
-					<a href="/events">
-						<button class="navigation__button">About Innovision</button>
+					<a href="/">
+						<button class="navigation__button">Home</button>
 					</a>
 				</li>
 				<li>
@@ -90,17 +98,22 @@ function Registration() {
 						<button class="navigation__button">Contact Us</button>
 					</a>
 				</li>
+                <li>
+					<a href="/login">
+						<button class="navigation__button">Login</button>
+					</a>
+				</li>
 			</ul>
 		</div>
 
-        <div class="ticket-visual_visual" id="ticket">
+        <div class="ticket-visual_visual" id="ticket" style={{marginTop: '35px'}}>
             <div class="left"></div>
             <div class="right"></div>
             <div class="ticket-visual-wrapper">
                 <div class="ticket-visual_profile">
                 <div class="ticket-profile_profile">
                     <img
-                    src="https://github.com/aritrakrbasu.png"
+                    src={profilePicDefault}
                     alt="medhatdawoud"
                     class="ticket-profile_image"
                     id="photo" 

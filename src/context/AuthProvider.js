@@ -189,7 +189,6 @@ export function AuthProvider({ children }) {
       if(user && user.uid)
       {
         db.collection("users").doc(user.uid).onSnapshot((docs)=>{
-          console.log(docs)
           if(docs.exists)
             {
               setCurrentUser(docs.data())

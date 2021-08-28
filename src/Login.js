@@ -1,9 +1,10 @@
 import React,{useEffect,useRef,useState} from 'react'
-import { Spinner } from 'react-bootstrap'
+import { Image, Spinner } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 import cloud from './cloud.png'
+import Navbar from './components/Navbar'
 import { useAuth } from './context/AuthProvider'
-
+import logo from './logo.png'
 function Login() {
 
     const[loading,setLoading]=useState(false)
@@ -46,8 +47,9 @@ function Login() {
             <div class="stars"></div>
 		<div class="twinkling"></div>
 		<div class="clouds" style={{ backgroundImage: `url(${cloud})` }}></div>
-
-            <div className="registration_form_holder">
+<Navbar />
+            <div className="registration_form_holder login_form_holder">
+                <Image src={logo} className="logo-login" />
                 <form class="registration_form">
                     <input type="text" placeholder="Email Id" ref={emailRef}/>
                     <input type="password" placeholder="Password" ref={passwordRef}/>
@@ -57,11 +59,11 @@ function Login() {
                             <button class="learn-more" onClick={handleLogin}>
 
                             {loading?(
-                                            <Spinner animation="border" role="status">
-                                            <span className="sr-only">Loading...</span>
+                                            <Spinner variant="light" animation="border" role="status">
+                                           
                                           </Spinner>):(
                                             <>
-                                             <span class="circle" aria-hidden="true">
+                                             <span  class="circle" aria-hidden="true">
                                 <span class="icon arrow"></span>
                                 </span>
                                 <span class="button-text">Login Now</span>

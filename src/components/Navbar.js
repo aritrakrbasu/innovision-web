@@ -20,7 +20,7 @@ function Navbar() {
 				</li>
 				<li>
 					<Link to="/about">
-						<button class="navigation__button">About Innovision</button>
+						<button class="navigation__button">About </button>
 					</Link>
 				</li>
 				<li>
@@ -29,9 +29,15 @@ function Navbar() {
 					</Link>
 				</li>
 				<li>
-					<a href="#">
-						<button class="navigation__button">Contact Us</button>
-					</a>
+                    <Link to="/login">
+						<button class="navigation__button">Login</button>
+					</Link>
+				</li>
+				<li>
+                    <br></br>
+                    <Link to="/register" class="brk-btn">
+                        Register
+                    </Link>
 				</li>
 			</ul>
 		</div>

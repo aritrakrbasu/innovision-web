@@ -460,7 +460,7 @@ canvas {
 		left:0;
 		display: flex;
 		flex:1 1 0;
-
+		padding: 0px;
 	}
 	.frame__deco-inner
 	{
@@ -481,7 +481,11 @@ canvas {
 		align-items: center;
 		flex-direction: column;
 	}
-	
+	.brk-btn
+	{
+		font-size: 10px;
+		margin-right: 20px;
+	}
 }
 
 .navigation__button::after {

@@ -51,7 +51,7 @@ function Dashboard() {
         {
             setRegisteredEvents(currentUser.registeredEvents)
         }
-    },[])
+    },[currentUser])
     return (
         <Container fluid={true}>
           <Row>

@@ -65,13 +65,6 @@ function Explode() {
 		<Navbar />
 		
         <div id="container"></div>
-			<div class="frame">
-
-				<div class="">
-					<span class="frame__deco-inner dept_text">Department of CSE <br></br>presents</span>
-				</div>
-				
-			</div>
 			<div class="content">
 				<div class="content__item">
 					

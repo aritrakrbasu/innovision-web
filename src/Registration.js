@@ -1,4 +1,4 @@
-import React, { useState,useRef } from 'react'
+import React, { useState,useRef, useEffect } from 'react'
 import './styles/registrations.css'
 import logo from './logo_card.png'
 import mail from './mail.png'
@@ -19,8 +19,15 @@ function Registration() {
     const emailRef = useRef()
     const phonenumberRef = useRef()
     const nameRef = useRef()
-    const { createUser } = useAuth()
+    const { createUser, currentUser } = useAuth()
     const history = useHistory()
+
+    useEffect(()=>{
+        if(currentUser && currentUser.uid)
+        {
+            history.push("/dashboard")
+        }
+    },[currentUser])
 
     function uploadImage(e)
     {

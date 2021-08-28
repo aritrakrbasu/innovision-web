@@ -13,10 +13,10 @@ import Login from './Login';
 import { AuthProvider } from './context/AuthProvider';
 import PrivateRoute from './components/PrivateRoute' 
 import Dashboard from './dashboard';
-import Events from './Events';
 import Vote from './Vote';
 import About from './About';
 import Teams from './Teams';
+import LandingPage from './LandingPage';
 function App() {
   return (
     <>
@@ -27,6 +27,7 @@ function App() {
         <Route exact path="/register" component={Registration} />
         <Route exact path="/login" component={Login} />
         <PrivateRoute exact path="/dashboard" component={Dashboard} />
+        <Route exact path="/events/:id" component={LandingPage} />
         <PrivateRoute exact path="/vote" component={Vote} />
         <Route exact path="/about" component={About} />
         <Route exact path="/team" component={Teams} />

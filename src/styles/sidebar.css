@@ -392,6 +392,18 @@ position: relative
   text-align: center;
 }
 
+.item__nameStyle{
+  font-size:14px;
+  color:#e8ebed;
+  margin-top: 15px;
+  line-height: 20px;
+  text-overflow: ellipsis !important; 
+  overflow:hidden;
+  white-space: nowrap;
+  text-transform: capitalize;
+  text-align: center;
+}
+
 .item-creator
 {
   color: #e8ebed;

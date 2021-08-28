@@ -14,6 +14,9 @@ function Dashboard() {
     const [events, setEvents] = useState()
     const [show, setShow] = useState(false);
     const [selectedId, setSelectedId] = useState();
+    const [githubReq, setGithubReq] = useState(false);
+    const [teamNameReq, setTeamNameReq] = useState(false);
+    const [maxTeamMembers, setMaxTeamMembers] = useState(1);
     const [selectedRules, setSelectedRules] = useState();
     const [selectedDescription, setSelectedDescription] = useState();
     const [registeredEvents, setRegisteredEvents] = useState([]);
@@ -22,11 +25,26 @@ function Dashboard() {
     const handleClose = (id) => {
         setShow(false)
     }
-    const handleShow = (id,rules,description) => {
+    const handleShow = (event) => {
         setShow(true)
-        setSelectedId(id)
-        setSelectedRules(rules)
-        setSelectedDescription(description)
+        setSelectedId(event.id)
+        setSelectedRules(event.rules)
+        setSelectedDescription(event.description)
+        if(event.hasOwnProperty("githubRequired") && event.githubRequired){
+            setGithubReq(true)
+        } else {
+            setGithubReq(false)
+        }
+        if(event.hasOwnProperty("teamNameRequired") && event.teamNameRequired){
+            setTeamNameReq(true)
+        } else {
+            setTeamNameReq(false)
+        }
+        if(event.hasOwnProperty("maxTeamSize") && event.maxTeamSize){
+            setMaxTeamMembers(event.maxTeamSize)
+        } else {
+            setMaxTeamMembers(1)
+        }
     }
 
     useEffect(()=>{
@@ -62,18 +80,18 @@ function Dashboard() {
             <Container fluid>
             <h1 className="section-heading">Events</h1>
             <Row>
-                {events && events.length>0 && events.map((event)=>{
+                {events && events.length>0 && events.map((event,index)=>{
                     if(registeredEvents.includes(event.id))
                     {
                         return(
-                            <Col lg={2} md={2} className="item-container">
+                            <Col lg={2} md={2} className="item-container" key={index}>
                                 <div className="item-holder">
                                     <img src={`./posters/${event.id}.jpeg`} className="item-holder-image img-fluid" />
                                     <div className="registered_overlay">
                                         <img src={stamp}  className="stamp"/>
                                     </div>
-                                    <h2 class="item-name">{event.name}</h2>
-                                    <h3 class="item-creator">{event.type}</h3>
+                                    <div className="item__nameStyle">{event.name}</div>
+                                    <h3 className="item-creator">{event.type}</h3>
                                     <br></br>
                                     <br></br>
                                     <br></br>
@@ -84,13 +102,13 @@ function Dashboard() {
                     }else
                     {
                         return(
-                            <Col lg={2} md={2} className="item-container">
+                            <Col lg={2} md={2} className="item-container" key={index}>
                                 <div className="item-holder">
                                     <img src={`./posters/${event.id}.jpeg`} className="item-holder-image img-fluid" />
-                                    <h2 class="item-name">{event.name}</h2>
-                                    <h3 class="item-creator">{event.type}</h3>
+                                    <div className="item-name">{event.name}</div>
+                                    <h3 className="item-creator">{event.type}</h3>
                                     
-                                    <Button className="event_register" onClick={()=>handleShow(event.id,event.rules,event.description)}> <span class="major">Register</span> </Button>
+                                    <Button className="event_register" onClick={()=>handleShow(event)}> <span class="major">Register</span> </Button>
                                 </div>
                             </Col>
                         )
@@ -103,7 +121,7 @@ function Dashboard() {
             </Col>
           </Row>
 
-          <EventRegistrationModal show={show} rules={selectedRules} description={selectedDescription}  eventid={selectedId} onHide={handleClose}/>
+          <EventRegistrationModal show={show} rules={selectedRules} description={selectedDescription}  eventid={selectedId} githubRequired={githubReq} teamNameRequired={teamNameReq} maxTeamMembers={maxTeamMembers} onHide={handleClose}/>
         </Container>
     )
 }

@@ -94,20 +94,22 @@ function Explode() {
 											<div className="events_text_holder_Web">
 												<p dangerouslySetInnerHTML={{__html:event.description}}></p>
 	
-												<Link to="/register" class="learn-more">
-												<span class="circle" aria-hidden="true">
-												<span class="icon arrow"></span>
-												</span>
-												<span class="button-text">Register Now</span>
-									
-											</Link>
-												<button class="learn-more ml-2">
-													<span class="circle" aria-hidden="true">
-													<span class="icon arrow"></span>
-													</span>
-													<span class="button-text">Read More</span>
-										
-												</button>
+												<Link to="/register">
+													<button class="learn-more ml-2">
+														<span class="circle" aria-hidden="true">
+														<span class="icon arrow"></span>
+														</span>
+														<span class="button-text">Register Now</span>
+													</button>
+												</Link>
+												<Link to={`/events/${event.id}`}>
+													<button class="learn-more ml-2">
+														<span class="circle" aria-hidden="true">
+														<span class="icon arrow"></span>
+														</span>
+														<span class="button-text">Read More</span>
+													</button>
+												</Link>
 											</div>
 											</Col>
 											<Col lg={4}>
@@ -134,20 +136,22 @@ function Explode() {
 										<div className="events_text_holder_Web">
 											<p dangerouslySetInnerHTML={{__html:event.description}}></p>
 
-											<Link to="/register" class="learn-more">
-												<span class="circle" aria-hidden="true">
-												<span class="icon arrow"></span>
-												</span>
-												<span class="button-text">Register Now</span>
-									
+											<Link to="/register">
+												<button class="learn-more ml-2">
+													<span class="circle" aria-hidden="true">
+													<span class="icon arrow"></span>
+													</span>
+													<span class="button-text">Register Now</span>
+												</button>
 											</Link>
-											<button class="learn-more ml-2">
-												<span class="circle" aria-hidden="true">
-												<span class="icon arrow"></span>
-												</span>
-												<span class="button-text">Read More</span>
-									
-											</button>
+											<Link to={`/events/${event.id}`}>
+												<button class="learn-more ml-2">
+													<span class="circle" aria-hidden="true">
+													<span class="icon arrow"></span>
+													</span>
+													<span class="button-text">Read More</span>
+												</button>
+											</Link>
 										</div>
 										</Col>
 									</Row>
@@ -169,20 +173,22 @@ function Explode() {
 										<div className="events_text_holder_Web">
 											<p dangerouslySetInnerHTML={{__html:event.description}}></p>
 
-											<Link to="/register" class="learn-more">
-												<span class="circle" aria-hidden="true">
-												<span class="icon arrow"></span>
-												</span>
-												<span class="button-text">Register Now</span>
-									
+											<Link to="/register">
+												<button class="learn-more ml-2">
+													<span class="circle" aria-hidden="true">
+													<span class="icon arrow"></span>
+													</span>
+													<span class="button-text">Register Now</span>
+												</button>
 											</Link>
-											<button class="learn-more ml-2">
-												<span class="circle" aria-hidden="true">
-												<span class="icon arrow"></span>
-												</span>
-												<span class="button-text">Read More</span>
-									
-											</button>
+											<Link to={`/events/${event.id}`}>
+												<button class="learn-more ml-2">
+													<span class="circle" aria-hidden="true">
+													<span class="icon arrow"></span>
+													</span>
+													<span class="button-text">Read More</span>
+												</button>
+											</Link>
 										</div>
 										</Col>
 									</Row>

@@ -1,0 +1,23 @@
+.participant_count
+{
+    z-index: 999;
+    font-weight: bold;
+    font-size: 30px;
+    color:#fff;
+    margin-top: -20px;
+    text-align: center;
+    right:0;
+    width: 100%;
+    background-color: #000;
+    box-shadow: 0 0 60px rgba(0, 0, 0, 0.3);
+    padding: 10px 0px;
+}
+
+.participant_count span
+{
+    display: block;
+    font-size: 30px;
+    opacity: 0.1;
+    position: absolute;
+    width: 100%;
+}

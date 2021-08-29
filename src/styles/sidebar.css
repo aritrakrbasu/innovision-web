@@ -346,6 +346,12 @@ a
 .section-heading
 {
   color:#e8ebed;
+  font-size: 30px;
+  margin:25px 0px
+}
+.section-heading-small
+{
+  color:#e8ebed;
   font-size: 20px;
   margin:25px 0px
 }
@@ -393,10 +399,12 @@ position: relative
 }
 
 .item__nameStyle{
-  font-size:14px;
+  font-size:16px;
+  font-weight: bold;
   color:#e8ebed;
   margin-top: 15px;
-  line-height: 20px;
+  line-height: 30px;
+  letter-spacing: 2px;
   text-overflow: ellipsis !important; 
   overflow:hidden;
   white-space: nowrap;

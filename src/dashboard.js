@@ -6,6 +6,7 @@ import stamp from './registered.png'
 import { db } from './firebase'
 import EventRegistrationModal from './components/EventRegistrationModal'
 import { useAuth } from './context/AuthProvider'
+import SubmissionForm from './components/SubmissionForm'
 
 
 
@@ -13,6 +14,7 @@ function Dashboard() {
 
     const [events, setEvents] = useState()
     const [show, setShow] = useState(false);
+    const [showSubmission, setshowSubmission] = useState(false);
     const [selectedId, setSelectedId] = useState();
     const [githubReq, setGithubReq] = useState(false);
     const [teamNameReq, setTeamNameReq] = useState(false);
@@ -20,10 +22,13 @@ function Dashboard() {
     const [selectedRules, setSelectedRules] = useState();
     const [selectedDescription, setSelectedDescription] = useState();
     const [registeredEvents, setRegisteredEvents] = useState([]);
+    const [eventData, setEventData] = useState();
+
     const {currentUser} = useAuth()
 
     const handleClose = (id) => {
         setShow(false)
+        setshowSubmission(false)
     }
     const handleShow = (event) => {
         setShow(true)
@@ -45,6 +50,11 @@ function Dashboard() {
         } else {
             setMaxTeamMembers(1)
         }
+    }
+
+    const showForm = (event) => {
+        setshowSubmission(true)
+        setEventData(event)
     }
 
     useEffect(()=>{
@@ -70,6 +80,7 @@ function Dashboard() {
             setRegisteredEvents(currentUser.registeredEvents)
         }
     },[currentUser])
+    
     return (
         <Container fluid={true}>
           <Row>
@@ -77,6 +88,48 @@ function Dashboard() {
             <Sidebar />
             </Col>
             <Col lg={11}>
+            <Container fluid>
+            <Row className="mt-5">
+                {
+                    (registeredEvents.includes("thewallarticle") || registeredEvents.includes("thewallartwork") 
+                    || registeredEvents.includes("thewallpoetry") || registeredEvents.includes("shutterbugshortvideos") 
+                    || registeredEvents.includes("shutterbugphotos")) && (
+                    <h1 className="section-heading">Submission</h1>
+                    )
+                }
+                
+            {events && events.length>0 && events.map((event,index)=>{
+                if(index > 0)
+                {
+                    
+                }
+                if( registeredEvents.includes(event.id))
+                {
+                    if(event.id === "thewallarticle"|| event.id === "thewallartwork"||event.id === "thewallpoetry"||event.id ==="shutterbugshortvideos"||event.id ==="shutterbugphotos")
+                    {
+                        return(
+                            <Col lg={2} xs={6} md={2} className="item-container" key={index}>
+                            <div className="item-holder ">
+                            <Button className="event_register p-0 " onClick={()=>showForm(event)}> 
+                                <img src={`./icon/${event.id}.png`} className="item-holder-image img-fluid" />
+                                </Button>
+                                <div className="item__nameStyle">{event.name}</div>
+                            </div>
+                            
+                        </Col>
+                    )
+                    }else
+                    return null
+                }else
+                return null
+
+            })}         
+                
+            </Row>
+        </Container>
+
+
+
             <Container fluid>
             <h1 className="section-heading">Events</h1>
             <Row>
@@ -118,10 +171,13 @@ function Dashboard() {
                 
             </Row>
         </Container>
+
             </Col>
           </Row>
 
           <EventRegistrationModal show={show} rules={selectedRules} description={selectedDescription}  eventid={selectedId} githubRequired={githubReq} teamNameRequired={teamNameReq} maxTeamMembers={maxTeamMembers} onHide={handleClose}/>
+
+          <SubmissionForm  show={showSubmission} onHide={handleClose} eventData={eventData}/>
         </Container>
     )
 }

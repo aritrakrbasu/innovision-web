@@ -138,10 +138,10 @@
 .brk-btn {
 	position: relative;
 	background: none;
-	color: aqua;
+	color: #FD1C7C;
 	text-transform: uppercase;
 	text-decoration: none;
-	border: 0.2em solid aqua;
+	border: 0.2em solid #FD1C7C;
 	padding: 0.5em 1em;
   }
   .brk-btn::before {
@@ -188,4 +188,25 @@
   .logo-login
   {
 	  max-width:200px
+  }
+
+  .modal-body
+  {
+	  color:#000 !important;
+  }
+
+  @media all and (max-width: 480px) {
+	  .modal-body
+	  {
+		  margin-bottom: 50px !important;
+	  }
+	  .login_form_holder
+	  {
+		  height :auto
+	  }
+
+	  .item-holder:last-child
+	  {
+		  margin-bottom: 100px;
+	  }
   }

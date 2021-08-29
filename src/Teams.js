@@ -13,9 +13,8 @@ function Teams() {
             <div class="twinkling"></div>
             <div class="clouds" style={{ backgroundImage: `url(${cloud})` }}></div>
             <Navbar/>
-            <div className="p-5 mb-5"></div>
         <Container >
-        <h1 class="hero glitch layers no_background" data-text="The Team"><span>The Team</span></h1>
+        <h1 class="hero glitch layers no_background section_heading_team"  data-text="The Team"><span>The Team</span></h1>
             <Row>
                 <Col lg={3} xs={3}>
                     <div class="card card1">

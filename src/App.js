@@ -23,7 +23,6 @@ function App() {
     <Router>
     <AuthProvider>
       <Switch>
-        <Route exact path="/" component={Explode} />
         <Route exact path="/register" component={Registration} />
         <Route exact path="/login" component={Login} />
         <PrivateRoute exact path="/dashboard" component={Dashboard} />
@@ -31,6 +30,7 @@ function App() {
         <PrivateRoute exact path="/vote" component={Vote} />
         <Route exact path="/about" component={About} />
         <Route exact path="/team" component={Teams} />
+        <Route path="/" component={Explode} />
         {/* <Route path="*" component={Nf} /> */}
       </Switch>
       </AuthProvider>

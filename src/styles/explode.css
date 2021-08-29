@@ -554,7 +554,6 @@ canvas {
 	z-index: 2;
 	letter-spacing: 10px;
 	background-color: #000;
-	
 	padding: 15px;
 	/* Bright things in dark environments usually cast that light, giving off a glow */
 	filter: drop-shadow(0 1px 3px);

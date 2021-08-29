@@ -146,6 +146,8 @@ function EventRegistrationModal(props) {
                     <Button variant="dark" type="submit" disabled={!checked}> {loading ? (<Spinner animation="border" role="status">
                                             <span className="sr-only">Loading...</span>
                                           </Spinner>): "Register Now"} </Button>
+                    <Button variant="light"  onClick={handleClose}> Close </Button>
+                    
                 </Form>
         </Modal.Body>
         </Modal>

@@ -77,7 +77,7 @@ function Explode() {
 					
 					<h3 class="content__location">September 1  &mdash; 3</h3>
 					<h1 class="content__title">Innovision</h1>
-					<p class="content__date">Image Infinity</p>
+					<p class="content__date">Imagine Infinity</p>
 					 
 				</div>
 				{

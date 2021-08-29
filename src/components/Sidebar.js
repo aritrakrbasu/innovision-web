@@ -21,7 +21,7 @@ function Sidebar() {
     return (
         <div className="sidebar">
             <a href="/">
-              <img src={logo} alt="logo" className="sidebar-brand img-fluid" />
+              <img src={logo} alt="logo" className="sidebar-brand img-fluid p-3" />
             </a>
             <ul className="sidebar-ul">
                 <NavLink to="/dashboard" activeClassName="active"><li><FontAwesomeIcon icon={faFire} /><span>Home</span></li></NavLink>

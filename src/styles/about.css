@@ -22,3 +22,21 @@
     background-color: transparent;
     text-align: left !important;
 }
+
+@media all and (max-width: 480px) { 
+
+    .about__container h1
+    {
+        margin-top: 0px;
+        font-size: 50px;
+    }
+    .about__container p
+    {
+        font-size: 14px;
+        text-align: justify;
+        width: 80%;
+        margin:0px auto
+    }
+
+
+}

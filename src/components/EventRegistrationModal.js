@@ -15,9 +15,6 @@ function EventRegistrationModal(props) {
     const [member2Email,setMember2Email] = useState('')
     const [member3Email,setMember3Email] = useState('')
     const [member4Email,setMember4Email] = useState('')
-    const [member2Name,setMember2Name] = useState('')
-    const [member3Name,setMember3Name] = useState('')
-    const [member4Name,setMember4Name] = useState('')
     const [githubId2, setGithubId2] = useState('')
     const [githubId3, setGithubId3] = useState('')
     const [githubId4, setGithubId4] = useState('')
@@ -31,6 +28,12 @@ function EventRegistrationModal(props) {
         setMember2Email('')
         setMember3Email('')
         setMember4Email('')
+        setGithubId('')
+        setGithubId2('')
+        setGithubId3('')
+        setGithubId4('')
+        setHackerrankId('')
+        setTeamName('')
     }
 
     function registerToEvent(e)
@@ -70,34 +73,41 @@ function EventRegistrationModal(props) {
                 detailsJson.member4Email = member4Email
             }
 
-            handleVerify().then(()=>{
+            handleVerify().then((jsonData)=>{
                 if(member2Email.length>0){
-                    detailsJson.member2Name = member2Name
+                    detailsJson.member2Name = jsonData.member2Name
                 }
                 if(member3Email.length>0){
-                    detailsJson.member3Name = member3Name
+                    detailsJson.member3Name = jsonData.member3Name
                 }
                 if(member4Email.length>0){
-                    detailsJson.member4Name = member4Name
+                    detailsJson.member4Name = jsonData.member4Name
                 }
-                db.collection("events").doc(props.eventid).update({
-                    participants:firebasevalue.arrayUnion(detailsJson)
+                console.log(detailsJson)
+                db.collection("users").doc(currentUser.uid).update({
+                    registeredEvents:firebasevalue.arrayUnion(props.eventid)
                 }).then(()=>{
-                    db.collection("users").doc(currentUser.uid).update({
-                        registeredEvents:firebasevalue.arrayUnion(props.eventid)
+                    db.collection("events").doc(props.eventid).update({
+                        participants:firebasevalue.arrayUnion(detailsJson)
                     }).then(()=>{
                         setLoading(false)
                         setChecked(false)
                         setError('')
+                        setMember2Email('')
+                        setMember3Email('')
+                        setMember4Email('')
+                        setGithubId('')
+                        setGithubId2('')
+                        setGithubId3('')
+                        setGithubId4('')
+                        setHackerrankId('')
+                        setTeamName('')
                         props.onHide()
                     })
                 })
             }).catch(err => {
                 setLoading(false)
                 setError(err)
-                setMember2Name('')
-                setMember3Name('')
-                setMember4Name('')
             })
         }
         else
@@ -110,12 +120,13 @@ function EventRegistrationModal(props) {
     function handleVerify() {
         return new Promise((resolve,reject) => {
             let status = []
+            const memberJson = {}
             let arrayLen = (member2Email.length>0) + (member3Email.length>0) + (member4Email.length>0);
             if(member2Email.length>0){
                 db.collection("users").where('email','==',member2Email).get().then(docs=>{
                     if(!docs.empty){
+                        memberJson.member2Name = (docs.docs[0].data().displayName)
                         status.push(true)
-                        setMember2Name(docs.docs[0].data().displayName)
                     } else {
                         status.push(false)
                     }
@@ -124,8 +135,8 @@ function EventRegistrationModal(props) {
             if(member3Email.length>0){
                 db.collection("users").where('email','==',member3Email).get().then(docs=>{
                     if(!docs.empty){
+                        memberJson.member3Name = (docs.docs[0].data().displayName)
                         status.push(true)
-                        setMember3Name(docs.docs[0].data().displayName)
                     } else {
                         status.push(false)
                     }
@@ -134,8 +145,8 @@ function EventRegistrationModal(props) {
             if(member4Email.length>0){
                 db.collection("users").where('email','==',member4Email).get().then(docs=>{
                     if(!docs.empty){
+                        memberJson.member4Name = (docs.docs[0].data().displayName)
                         status.push(true)
-                        setMember4Name(docs.docs[0].data().displayName)
                     } else {
                         status.push(false)
                     }
@@ -146,7 +157,7 @@ function EventRegistrationModal(props) {
                 setTimeout(()=>{
                     if(status.length==arrayLen){
                         if(status.every((val)=>val==true)){
-                            resolve()
+                            resolve(memberJson)
                         } else {
                             reject("One or more members aren't registered in our website! Register and try again.")
                         }

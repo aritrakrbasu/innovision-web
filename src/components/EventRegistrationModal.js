@@ -15,6 +15,9 @@ function EventRegistrationModal(props) {
     const [member2Email,setMember2Email] = useState('')
     const [member3Email,setMember3Email] = useState('')
     const [member4Email,setMember4Email] = useState('')
+    const [member2Name,setMember2Name] = useState('')
+    const [member3Name,setMember3Name] = useState('')
+    const [member4Name,setMember4Name] = useState('')
     const [githubId2, setGithubId2] = useState('')
     const [githubId3, setGithubId3] = useState('')
     const [githubId4, setGithubId4] = useState('')
@@ -37,7 +40,7 @@ function EventRegistrationModal(props) {
             e.preventDefault()
             setLoading(true)
             let detailsJson = {
-                name : currentUser.displayName,
+                member1name : currentUser.displayName,
                 member1Email : currentUser.email,
                 phoneNumber : currentUser.phoneNumber
             }
@@ -68,7 +71,15 @@ function EventRegistrationModal(props) {
             }
 
             handleVerify().then(()=>{
-                console.log("hi")
+                if(member2Email.length>0){
+                    detailsJson.member2Name = member2Name
+                }
+                if(member3Email.length>0){
+                    detailsJson.member3Name = member3Name
+                }
+                if(member4Email.length>0){
+                    detailsJson.member4Name = member4Name
+                }
                 db.collection("events").doc(props.eventid).update({
                     participants:firebasevalue.arrayUnion(detailsJson)
                 }).then(()=>{
@@ -77,12 +88,16 @@ function EventRegistrationModal(props) {
                     }).then(()=>{
                         setLoading(false)
                         setChecked(false)
+                        setError('')
                         props.onHide()
                     })
                 })
             }).catch(err => {
                 setLoading(false)
                 setError(err)
+                setMember2Name('')
+                setMember3Name('')
+                setMember4Name('')
             })
         }
         else
@@ -100,6 +115,7 @@ function EventRegistrationModal(props) {
                 db.collection("users").where('email','==',member2Email).get().then(docs=>{
                     if(!docs.empty){
                         status.push(true)
+                        setMember2Name(docs.docs[0].data().displayName)
                     } else {
                         status.push(false)
                     }
@@ -109,6 +125,7 @@ function EventRegistrationModal(props) {
                 db.collection("users").where('email','==',member3Email).get().then(docs=>{
                     if(!docs.empty){
                         status.push(true)
+                        setMember3Name(docs.docs[0].data().displayName)
                     } else {
                         status.push(false)
                     }
@@ -118,6 +135,7 @@ function EventRegistrationModal(props) {
                 db.collection("users").where('email','==',member4Email).get().then(docs=>{
                     if(!docs.empty){
                         status.push(true)
+                        setMember4Name(docs.docs[0].data().displayName)
                     } else {
                         status.push(false)
                     }
@@ -135,14 +153,12 @@ function EventRegistrationModal(props) {
                     }
                 },1000)
             }
-
             if(arrayLen==0) {
                 resolve()
             }
         })
     }
 
-    console.log(props)
     return (
         <Modal size="lg" centered show={props.show} onHide={handleClose}>
         <Modal.Body>

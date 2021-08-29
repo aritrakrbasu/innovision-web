@@ -7,6 +7,7 @@ import { db } from './firebase'
 import EventRegistrationModal from './components/EventRegistrationModal'
 import { useAuth } from './context/AuthProvider'
 import SubmissionForm from './components/SubmissionForm'
+import AdminDashboard from './components/AdminDashboard'
 
 
 
@@ -81,104 +82,121 @@ function Dashboard() {
         }
     },[currentUser])
     
+    {console.log(currentUser)}
+    
     return (
-        <Container fluid={true}>
+        <>
+        {
+            
+                <>
+                <Container fluid={true}>
           <Row>
             <Col lg={1}>
             <Sidebar />
             </Col>
             <Col lg={11}>
-            <Container fluid>
-            <Row className="mt-5">
-                {
-                    (registeredEvents.includes("thewallarticle") || registeredEvents.includes("thewallartwork") 
-                    || registeredEvents.includes("thewallpoetry") || registeredEvents.includes("shutterbugshortvideos") 
-                    || registeredEvents.includes("shutterbugphotos")) && (
-                    <h1 className="section-heading">Submission</h1>
-                    )
-                }
-                
-            {events && events.length>0 && events.map((event,index)=>{
-                if(index > 0)
-                {
-                    
-                }
-                if( registeredEvents.includes(event.id))
-                {
-                    if(event.id === "thewallarticle"|| event.id === "thewallartwork"||event.id === "thewallpoetry"||event.id ==="shutterbugshortvideos"||event.id ==="shutterbugphotos")
-                    {
-                        return(
-                            <Col lg={2} xs={6} md={2} className="item-container" key={index}>
-                            <div className="item-holder ">
-                            <Button className="event_register p-0 " onClick={()=>showForm(event)}> 
-                                <img src={`./icon/${event.id}.png`} className="item-holder-image img-fluid" />
-                                </Button>
-                                <div className="item__nameStyle">{event.name}</div>
-                            </div>
+                {currentUser.isCoordinator ? (
+                <AdminDashboard />
+                ):(
+                    <>
+                    <Container fluid>
+                    <Row className="mt-5">
+                        {
+                            (registeredEvents.includes("thewallarticle") || registeredEvents.includes("thewallartwork") 
+                            || registeredEvents.includes("thewallpoetry") || registeredEvents.includes("shutterbugshortvideos") 
+                            || registeredEvents.includes("shutterbugphotos")) && (
+                            <h1 className="section-heading">Submission</h1>
+                            )
+                        }
+                        
+                    {events && events.length>0 && events.map((event,index)=>{
+                        if(index > 0)
+                        {
                             
-                        </Col>
-                    )
-                    }else
-                    return null
-                }else
-                return null
-
-            })}         
-                
-            </Row>
-        </Container>
-
-
-
-            <Container fluid>
-            <h1 className="section-heading">Events</h1>
-            <Row>
-                {events && events.length>0 && events.map((event,index)=>{
-                    if(registeredEvents.includes(event.id))
-                    {
-                        return(
-                            <Col lg={2} md={2} className="item-container" key={index}>
-                                <div className="item-holder">
-                                    <img src={`./posters/${event.id}.jpeg`} className="item-holder-image img-fluid" />
-                                    <div className="registered_overlay">
-                                        <img src={stamp}  className="stamp"/>
+                        }
+                        if( registeredEvents.includes(event.id))
+                        {
+                            if(event.id === "thewallarticle"|| event.id === "thewallartwork"||event.id === "thewallpoetry"||event.id ==="shutterbugshortvideos"||event.id ==="shutterbugphotos")
+                            {
+                                return(
+                                    <Col lg={2} xs={6} md={2} className="item-container" key={index}>
+                                    <div className="item-holder ">
+                                    <Button className="event_register p-0 " onClick={()=>showForm(event)}> 
+                                        <img src={`./icon/${event.id}.png`} className="item-holder-image img-fluid" />
+                                        </Button>
+                                        <div className="item__nameStyle">{event.name}</div>
                                     </div>
-                                    <div className="item__nameStyle">{event.name}</div>
-                                    <h3 className="item-creator">{event.type}</h3>
-                                    <br></br>
-                                    <br></br>
-                                    <br></br>
-                                </div>
-                                
-                            </Col>
-                        )
-                    }else
-                    {
-                        return(
-                            <Col lg={2} md={2} className="item-container" key={index}>
-                                <div className="item-holder">
-                                    <img src={`./posters/${event.id}.jpeg`} className="item-holder-image img-fluid" />
-                                    <div className="item-name">{event.name}</div>
-                                    <h3 className="item-creator">{event.type}</h3>
                                     
-                                    <Button className="event_register" onClick={()=>handleShow(event)}> <span class="major">Register</span> </Button>
-                                </div>
-                            </Col>
-                        )
-                    }
+                                </Col>
+                            )
+                            }else
+                            return null
+                        }else
+                        return null
+        
+                    })}         
+                        
+                    </Row>
+                </Container>
+        
+        
+        
+                    <Container fluid>
+                    <h1 className="section-heading">Events</h1>
+                    <Row>
+                        {events && events.length>0 && events.map((event,index)=>{
+                            if(registeredEvents.includes(event.id))
+                            {
+                                return(
+                                    <Col lg={2} md={2} className="item-container" key={index}>
+                                        <div className="item-holder">
+                                            <img src={`./posters/${event.id}.jpeg`} className="item-holder-image img-fluid" />
+                                            <div className="registered_overlay">
+                                                <img src={stamp}  className="stamp"/>
+                                            </div>
+                                            <div className="item__nameStyle">{event.name}</div>
+                                            <h3 className="item-creator">{event.type}</h3>
+                                            <br></br>
+                                            <br></br>
+                                            <br></br>
+                                        </div>
+                                        
+                                    </Col>
+                                )
+                            }else
+                            {
+                                return(
+                                    <Col lg={2} md={2} className="item-container" key={index}>
+                                        <div className="item-holder">
+                                            <img src={`./posters/${event.id}.jpeg`} className="item-holder-image img-fluid" />
+                                            <div className="item-name">{event.name}</div>
+                                            <h3 className="item-creator">{event.type}</h3>
+                                            
+                                            <Button className="event_register" onClick={()=>handleShow(event)}> <span class="major">Register</span> </Button>
+                                        </div>
+                                    </Col>
+                                )
+                            }
+                        }
+                        )}          
+                        
+                    </Row>
+                </Container>
+                </>
+                    )}
+                    </Col>
+                    </Row>
+          
+                    <EventRegistrationModal show={show} rules={selectedRules} description={selectedDescription}  eventid={selectedId} githubRequired={githubReq} teamNameRequired={teamNameReq} maxTeamMembers={maxTeamMembers} onHide={handleClose}/>
+          
+                    <SubmissionForm  show={showSubmission} onHide={handleClose} eventData={eventData}/>
+                  </Container>
+                          </>
+
                 }
-                )}          
-                
-            </Row>
-        </Container>
-
-            </Col>
-          </Row>
-
-          <EventRegistrationModal show={show} rules={selectedRules} description={selectedDescription}  eventid={selectedId} githubRequired={githubReq} teamNameRequired={teamNameReq} maxTeamMembers={maxTeamMembers} onHide={handleClose}/>
-
-          <SubmissionForm  show={showSubmission} onHide={handleClose} eventData={eventData}/>
-        </Container>
+        }
+        </>
+        
     )
 }
 

@@ -17,6 +17,7 @@ import Vote from './Vote';
 import About from './About';
 import Teams from './Teams';
 import LandingPage from './LandingPage';
+import Bannerjee from './Bannerjee';
 function App() {
   return (
     <>
@@ -24,6 +25,7 @@ function App() {
     <AuthProvider>
       <Switch>
         <Route exact path="/register" component={Registration} />
+        <Route exact path="/banerjee" component={Bannerjee} />
         <Route exact path="/login" component={Login} />
         <PrivateRoute exact path="/dashboard" component={Dashboard} />
         <Route exact path="/events/:id" component={LandingPage} />

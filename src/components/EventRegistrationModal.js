@@ -1,3 +1,4 @@
+import { wait, waitFor } from '@testing-library/react';
 import React, { useRef,useState } from 'react'
 import { Form, Modal,Button, Spinner, FormText } from 'react-bootstrap'
 import { useAuth } from '../context/AuthProvider';
@@ -5,10 +6,11 @@ import { db, firebasevalue } from '../firebase';
 
 function EventRegistrationModal(props) {
     const [checked, setChecked] = useState(false);
-    const [error, setError] = useState(false);
+    const [error, setError] = useState('');
     const [loading,setLoading]=useState(false)
     const {currentUser} = useAuth()
     const [githubId, setGithubId] = useState('')
+    const [hackerrankId, setHackerrankId] = useState('')
     const [teamName, setTeamName] = useState('')
     const [member2Email,setMember2Email] = useState('')
     const [member3Email,setMember3Email] = useState('')
@@ -19,9 +21,13 @@ function EventRegistrationModal(props) {
 
     function handleClose()
     {
-        setError(false)
         props.onHide()
         setChecked(false)
+        setLoading(false)
+        setError('')
+        setMember2Email('')
+        setMember3Email('')
+        setMember4Email('')
     }
 
     function registerToEvent(e)
@@ -43,10 +49,13 @@ function EventRegistrationModal(props) {
                 if(githubId3.length>0)
                     detailsJson.githubId3 = githubId3
                 if(githubId4.length>0)
-                    detailsJson.githubId3 = githubId4
+                    detailsJson.githubId4 = githubId4
             }
             if(props.teamNameRequired && teamName.length>0){
                 detailsJson.teamName = teamName
+            }
+            if(props.hackerrankRequired && hackerrankId.length>0){
+                detailsJson.hackerrankId = hackerrankId
             }
             if(member2Email.length>0){
                 detailsJson.member2Email = member2Email
@@ -57,25 +66,82 @@ function EventRegistrationModal(props) {
             if(member4Email.length>0){
                 detailsJson.member4Email = member4Email
             }
-            db.collection("events").doc(props.eventid).update({
-                participants:firebasevalue.arrayUnion(detailsJson)
-            }).then(()=>{
-                db.collection("users").doc(currentUser.uid).update({
-                    registeredEvents:firebasevalue.arrayUnion(props.eventid)
+
+            handleVerify().then(()=>{
+                console.log("hi")
+                db.collection("events").doc(props.eventid).update({
+                    participants:firebasevalue.arrayUnion(detailsJson)
                 }).then(()=>{
-                    setLoading(false)
-                    setChecked(false)
-                    props.onHide()
+                    db.collection("users").doc(currentUser.uid).update({
+                        registeredEvents:firebasevalue.arrayUnion(props.eventid)
+                    }).then(()=>{
+                        setLoading(false)
+                        setChecked(false)
+                        props.onHide()
+                    })
                 })
+            }).catch(err => {
+                setLoading(false)
+                setError(err)
             })
         }
         else
         {
             e.preventDefault()
-            setError(true)
             setChecked(false)
         }
     }
+
+    function handleVerify() {
+        return new Promise((resolve,reject) => {
+            let status = []
+            let arrayLen = (member2Email.length>0) + (member3Email.length>0) + (member4Email.length>0);
+            if(member2Email.length>0){
+                db.collection("users").where('email','==',member2Email).get().then(docs=>{
+                    if(!docs.empty){
+                        status.push(true)
+                    } else {
+                        status.push(false)
+                    }
+                })
+            }
+            if(member3Email.length>0){
+                db.collection("users").where('email','==',member3Email).get().then(docs=>{
+                    if(!docs.empty){
+                        status.push(true)
+                    } else {
+                        status.push(false)
+                    }
+                })
+            }
+            if(member4Email.length>0){
+                db.collection("users").where('email','==',member4Email).get().then(docs=>{
+                    if(!docs.empty){
+                        status.push(true)
+                    } else {
+                        status.push(false)
+                    }
+                })
+            }
+
+            if(status.length!=arrayLen){
+                setTimeout(()=>{
+                    if(status.length==arrayLen){
+                        if(status.every((val)=>val==true)){
+                            resolve()
+                        } else {
+                            reject("One or more members aren't registered in our website! Register and try again.")
+                        }
+                    }
+                },1000)
+            }
+
+            if(arrayLen==0) {
+                resolve()
+            }
+        })
+    }
+
     console.log(props)
     return (
         <Modal size="lg" centered show={props.show} onHide={handleClose}>
@@ -94,8 +160,15 @@ function EventRegistrationModal(props) {
 
                     {props.githubRequired && (
                         <Form.Group className="mb-3" controlId="githubId">
-                            <Form.Label><b>Your GitHub Username</b></Form.Label>
+                            <Form.Label><b>GitHub Username</b></Form.Label>
                             <Form.Control type="text" placeholder="Enter your GitHub username" onChange={(e)=>{setGithubId(e.target.value)}} required/>
+                        </Form.Group>
+                    )}
+
+                    {props.hackerrankRequired && (
+                        <Form.Group className="mb-3" controlId="githubId">
+                            <Form.Label><b>Hackerrank Username</b></Form.Label>
+                            <Form.Control type="text" placeholder="Enter your Hackerrank username" onChange={(e)=>{setHackerrankId(e.target.value)}} required/>
                         </Form.Group>
                     )}
                 
@@ -140,9 +213,9 @@ function EventRegistrationModal(props) {
                         </Form.Group>
                     )}
                     <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                        <Form.Check type="checkbox" label="I have read everything"  onChange={()=>setChecked(!checked)} />
+                        <Form.Check type="checkbox" label="I have read everything" checked={checked} onChange={()=>setChecked(!checked)} />
                     </Form.Group>
-                    {/* {!checked && error && <div className="text-danger">Please check this field </div>} */}
+                    {error && error.length > 0 &&<div className="text-danger" style={{marginTop: '5px', marginBottom: '10px'}}>{error}</div>}
                     <Button variant="dark" type="submit" disabled={!checked}> {loading ? (<Spinner animation="border" role="status">
                                             <span className="sr-only">Loading...</span>
                                           </Spinner>): "Register Now"} </Button>

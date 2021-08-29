@@ -17,6 +17,7 @@ function Dashboard() {
     const [showSubmission, setshowSubmission] = useState(false);
     const [selectedId, setSelectedId] = useState();
     const [githubReq, setGithubReq] = useState(false);
+    const [hackerrankReq, setHackerrankReq] = useState(false);
     const [teamNameReq, setTeamNameReq] = useState(false);
     const [maxTeamMembers, setMaxTeamMembers] = useState(1);
     const [selectedRules, setSelectedRules] = useState();
@@ -49,6 +50,11 @@ function Dashboard() {
             setMaxTeamMembers(event.maxTeamSize)
         } else {
             setMaxTeamMembers(1)
+        }
+        if(event.hasOwnProperty("hackerrankRequired") && event.hackerrankRequired){
+            setHackerrankReq(true)
+        } else {
+            setHackerrankReq(false)
         }
     }
 
@@ -175,7 +181,7 @@ function Dashboard() {
             </Col>
           </Row>
 
-          <EventRegistrationModal show={show} rules={selectedRules} description={selectedDescription}  eventid={selectedId} githubRequired={githubReq} teamNameRequired={teamNameReq} maxTeamMembers={maxTeamMembers} onHide={handleClose}/>
+          <EventRegistrationModal show={show} rules={selectedRules} description={selectedDescription}  eventid={selectedId} githubRequired={githubReq} hackerrankRequired={hackerrankReq} teamNameRequired={teamNameReq} maxTeamMembers={maxTeamMembers} onHide={handleClose}/>
 
           <SubmissionForm  show={showSubmission} onHide={handleClose} eventData={eventData}/>
         </Container>

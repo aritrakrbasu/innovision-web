@@ -248,7 +248,7 @@ function SubmissionForm(props) {
         e.preventDefault();
         setLoading(true)
         setError()
-        if(artwork2Ref.current.value.length>0)
+        if(artwork2Ref.current?.value.length>0)
         {
             if(artwork2Ref.current.value === artwork1Ref.current.value)
             {
@@ -465,7 +465,7 @@ function SubmissionForm(props) {
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Submission 2</Form.Label>
-                            <Form.Control type="url" placeholder="Enter drive link" ref={artwork1Ref}/>
+                            <Form.Control type="url" placeholder="Enter drive link" ref={artwork2Ref}/>
                         </Form.Group>
                         
                         {error && (<div className="text-danger my-4">{error}</div>)}

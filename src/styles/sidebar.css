@@ -570,3 +570,8 @@ position: relative
     font-weight: 600;
     margin:15px 0px;
 }
+.my_submission
+{
+  background-color: rgba(0,0,0,0.2);
+  padding: 20px;
+}

@@ -435,7 +435,7 @@ canvas {
 	
 	.events_holder:nth-child(1)
 	{
-	  margin-top: 0px !important;
+	  margin-top: -150px !important;
 	}
 	.content__location , .content__date
 	{
@@ -1064,7 +1064,7 @@ canvas {
 
   .events_holder:nth-child(1)
   {
-	margin-top: 450%;
+	margin-top: 540%;
   }
 
   .event_list

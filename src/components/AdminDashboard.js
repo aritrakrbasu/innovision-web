@@ -210,6 +210,43 @@ function AdminDashboard() {
             })}
             </Row>
         </Container>
+        <Container>
+            <Row>
+                {events && events.length>0 && events.map((event)=>{
+                if(event.hasOwnProperty("submission")){
+                    return(
+                        <>
+                            <h1 className="section-heading-small mt-4">
+                                {`Submissions — ` + event.name}
+                            </h1>
+                            <Table responsive striped bordered hover variant="light">
+                                <thead>
+                                    <tr>
+                                    <th>#</th>
+                                    <th>Full Name</th>
+                                    <th>Submissions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {event.submission && event.submission.length>0 && event.submission.map((submission,index)=>{
+                                        return(
+                                            <tr>
+                                                <td>{index +1}</td>
+                                                <td>{submission.submittedByName}</td>
+                                                <td>
+                                                    {submission.hasOwnProperty("submission1Link") ? submission.submission1Link:''}
+                                                    <br/>
+                                                    {submission.hasOwnProperty("submission2Link") ? submission.submission2Link:''}
+                                                </td>
+                                            </tr>)
+                                    })}
+                                </tbody>
+                            </Table>
+                        </>
+                    )
+                }})}
+            </Row>
+        </Container>
         </>
     )
 }

@@ -18,6 +18,7 @@ import About from './About';
 import Teams from './Teams';
 import LandingPage from './LandingPage';
 import Bannerjee from './Bannerjee';
+import Mysubmission from './Mysubmission';
 function App() {
   return (
     <>
@@ -30,6 +31,7 @@ function App() {
         <PrivateRoute exact path="/dashboard" component={Dashboard} />
         <Route exact path="/events/:id" component={LandingPage} />
         <PrivateRoute exact path="/vote" component={Vote} />
+        <PrivateRoute exact path="/mysubmission" component={Mysubmission} />
         <Route exact path="/about" component={About} />
         <Route exact path="/team" component={Teams} />
         <Route path="/" component={Explode} />

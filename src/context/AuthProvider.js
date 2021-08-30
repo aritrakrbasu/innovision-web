@@ -21,8 +21,10 @@ export function AuthProvider({ children }) {
           displayName: name,
 
         }).then(()=>{
-          storageRef.child(file.name).put(file).then(()=>{
-            storageRef.child(file.name).getDownloadURL()
+          var fileExt = file.name.split('.').pop();
+          console.log(user.uid+'.'+fileExt)
+          storageRef.child(user.uid+'.'+fileExt).put(file).then(()=>{
+            storageRef.child(user.uid+'.'+fileExt).getDownloadURL()
             .then((url) => {
               db.collection("users").doc(user.uid).set({
                 displayName:name,

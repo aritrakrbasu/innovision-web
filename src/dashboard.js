@@ -88,7 +88,6 @@ function Dashboard() {
         }
     },[currentUser])
     
-    {console.log(currentUser)}
     
     return (
         <>
@@ -101,10 +100,6 @@ function Dashboard() {
                         <Sidebar />
                         </Col>
                         <Col lg={11}>
-                            {currentUser.isCoordinator ? (
-                            <AdminDashboard />
-                            ):(
-                                <>
                                 <Container fluid>
                                 <Row className="mt-5">
                                     {
@@ -188,10 +183,10 @@ function Dashboard() {
                                     
                                 </Row>
                             </Container>
-                            </>
-                                )}
+                            {currentUser.isCoordinator && currentUser.coordOf.length>0 &&(<AdminDashboard />)}
                                 </Col>
                                 </Row>
+                                
           
                     <EventRegistrationModal show={show} rules={selectedRules} description={selectedDescription}  eventid={selectedId} githubRequired={githubReq} hackerrankRequired={hackerrankReq} teamNameRequired={teamNameReq} maxTeamMembers={maxTeamMembers} onHide={handleClose}/>
 

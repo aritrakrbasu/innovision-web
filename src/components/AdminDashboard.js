@@ -85,13 +85,18 @@ function AdminDashboard() {
                                             <td>{index +1}</td>
                                             <td>{participant.teamName}</td>
                                             <td>
+                                               {participant.member1name && ` Member 1 Name : ${participant.member1name} `}<br />
                                                {participant.member1Email && ` Member 1 Email : ${participant.member1Email} `}<br />
                                                {participant.githubId && ` Member 1 Github : ${participant.githubId} `}<br />
+                                               {participant.member2Name && ` Member 2 Name : ${participant.member2Name} `}<br />
                                                {participant.member2Email && ` Member 2 Email : ${participant.member2Email} `}<br />
                                                {participant.githubId2 && ` Member 2 Github : ${participant.githubId2} `}<br />
+                                               {participant.member3Name && ` Member 3 Name : ${participant.member3Name} `}<br />
                                                {participant.member3Email && ` Member 3 Email : ${participant.member3Email} `}<br />
                                                {participant.githubId3 && ` Member 3 Github : ${participant.githubId3} `}<br />
+                                               {participant.member4Name && ` Member 4 Name : ${participant.member4Name} `}<br />
                                                {participant.member4Email && ` Member 4 Email : ${participant.member4Email} `}<br />
+                                               {participant.githubId4 && ` Member 4 Github : ${participant.githubId4} `}<br />
                                             </td>
                                             <td>{participant.phoneNumber}</td>
                                         
@@ -120,16 +125,50 @@ function AdminDashboard() {
                                 </thead>
                                 <tbody>
                                     {event?.participants.map((participant,index)=>{
+                                        
+                                        
                                         return(<tr key={index}>
                                             <td>{index +1}</td>
                                             <td>{participant.teamName}</td>
                                             <td>
-                                               {participant.name && ` Member 1 Name : ${participant.name} `}<br />
+                                               {` Member 1 Name : ${participant.name || participant.member1name} `}<br />
                                                {participant.member1Email && ` Member 1 Email : ${participant.member1Email} `}<br />
+                                               {participant.member1Email && ` Member 2 Name : ${participant.member2Name} `}<br />
                                                {participant.member2Email && ` Member 2 Email : ${participant.member2Email} `}<br />
-                                               {participant.member3Email && ` Member 3 Email : ${participant.member3Email} `}<br />
                                             </td>
                                             <td>{participant.phoneNumber}</td>
+                                        
+                                            </tr>)
+                                    })}
+                                </tbody>
+                            </Table>
+                            </>
+                    )
+                }
+                else if(event.id==='codathon'){
+                    return(
+                        <>
+                                <h1 className="section-heading-small mt-4">
+                                    {event.name}
+                                </h1>
+                                <Table responsive striped bordered hover variant="light">
+                                <thead>
+                                    <tr>
+                                    <th>#</th>
+                                    <th>Full Name</th>
+                                    <th>Email</th>
+                                    <th>Phone Number</th>
+                                    <th>HackerRank ID</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {event?.participants.map((participant,index)=>{
+                                        return(<tr key={index}>
+                                            <td>{index +1}</td>
+                                            <td>{participant.name || participant.member1name}</td>
+                                            <td>{participant.member1Email}</td>
+                                            <td>{participant.phoneNumber}</td>
+                                            <td>{participant.hackerrankId}</td>
                                         
                                             </tr>)
                                     })}
@@ -157,7 +196,7 @@ function AdminDashboard() {
                                     {event?.participants.map((participant,index)=>{
                                         return(<tr key={index}>
                                             <td>{index +1}</td>
-                                            <td>{participant.name}</td>
+                                            <td>{participant.name || participant.member1name}</td>
                                             <td>{participant.member1Email}</td>
                                             <td>{participant.phoneNumber}</td>
                                         

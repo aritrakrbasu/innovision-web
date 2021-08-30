@@ -38,10 +38,14 @@ function Registration() {
     function showImage(e)
     {
         var output = document.getElementById('photo');
-        output.src = URL.createObjectURL(e.target.files[0]);
-        output.onload = function() {
-          URL.revokeObjectURL(output.src) // free memory
+        if(e.target.files.length>0)
+        {
+            output.src = URL.createObjectURL(e.target.files[0]);
+            output.onload = function() {
+              URL.revokeObjectURL(output.src) // free memory
+            }
         }
+        
     }
 
     async function handleRegister(e) {

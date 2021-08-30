@@ -22,6 +22,8 @@ function Bannerjee() {
     function createUser(e)
     {
         e.preventDefault()
+        setError()
+        setSuccess()
         setLoading(true)
         auth.createUserWithEmailAndPassword(emailRef.current.value, passwordRef.current.value).then(function(result) {
             const user = auth.currentUser;
@@ -64,7 +66,10 @@ function Bannerjee() {
                 setLoading(false)
                 setError("error creating profile")
               });
-                })
+                }).catch(error => {
+                    setLoading(false)
+                    setError("error creating profile")
+                  });
     }
 
     return (

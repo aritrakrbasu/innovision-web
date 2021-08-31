@@ -57,10 +57,12 @@ function Mysubmission() {
                                             return(
                                             <>
                                                 <div className="my_submission text-light">
-                                                    <h5>{(submission ==='thewallpoetry' || submission ==='thewallarticle' || submission ==='thewallartwork') && "The Wall"} </h5>
-
-                                                    <h5>{(submission ==='shutterbugshortvideos') && "Reel Lens"} </h5>
-                                                    <h5>{(submission ==='shutterbugphotos') && "Shutterbug"} </h5>
+                                                    <h5>{(submission ==='thewallpoetry' ||submission ==='thewallpoetryteacher' ) && "The Wall - Poetry"} </h5>
+                                                    <h5>{(submission ==='thewallarticle' ||submission ==='thewallarticleteacher') && "The Wall - Article"} </h5>
+                                                    <h5>{(submission ==='thewallartwork' ||submission ==='thewallartworkteacher') && "The Wall - Artwork"} </h5>
+                            
+                                                    <h5>{(submission ==='shutterbugshortvideos' || submission ==='shutterbugshortvideosteacher') && "Reel Lens"} </h5>
+                                                    <h5>{(submission ==='shutterbugphotos' || submission ==='shutterbugphotosteacher') && "Shutterbug"} </h5>
                                                     <br></br>
                                                     <p>{currentUser.submitted[submission].submission1Link}</p>  
                                                     <p> {currentUser.submitted[submission].submission2Link}</p>   

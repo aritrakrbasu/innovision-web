@@ -10,6 +10,7 @@ import Explode from './Explode';
 import './styles/app.css'
 import Registration from './Registration';
 import Login from './Login';
+import TeacherLogin from './TeacherLogin';
 import { AuthProvider } from './context/AuthProvider';
 import PrivateRoute from './components/PrivateRoute' 
 import Dashboard from './dashboard';
@@ -19,6 +20,7 @@ import Teams from './Teams';
 import LandingPage from './LandingPage';
 import Bannerjee from './Bannerjee';
 import Mysubmission from './Mysubmission';
+import TeacherRegistration from './TeacherRegistration'
 function App() {
   return (
     <>
@@ -26,8 +28,10 @@ function App() {
     <AuthProvider>
       <Switch>
         <Route exact path="/register" component={Registration} />
+        <Route exact path="/teacher-register" component={TeacherRegistration} />
         <Route exact path="/banerjee" component={Bannerjee} />
         <Route exact path="/login" component={Login} />
+        <Route exact path="/teacher-login" component={TeacherLogin} />
         <PrivateRoute exact path="/dashboard" component={Dashboard} />
         <Route exact path="/events/:id" component={LandingPage} />
         <PrivateRoute exact path="/vote" component={Vote} />

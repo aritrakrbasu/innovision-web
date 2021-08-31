@@ -84,7 +84,7 @@ function Explode() {
 					showEvents && !loading &&(
 					<div className="event_list">
 						 <Container >
-							 {events && events.length>0 && events.map((event,index)=>{
+							 {events && events.length>0 && events.filter(event=> event.id != "thewallarticleteacher" && event.id != "thewallartworkteacher" && event.id != "thewallpoetryteacher" &&event.id !="shutterbugshortvideosteacher"&&event.id !="shutterbugphotosteacher").map((event,index)=>{
 
 								 if(index%2==0 && !isMobile)
 								 {

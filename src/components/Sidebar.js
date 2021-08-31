@@ -39,7 +39,9 @@ function Sidebar() {
                 {
                                         (registeredEvents.includes("thewallarticle") || registeredEvents.includes("thewallartwork") 
                                         || registeredEvents.includes("thewallpoetry") || registeredEvents.includes("shutterbugshortvideos") 
-                                        || registeredEvents.includes("shutterbugphotos")) && (
+                                        || registeredEvents.includes("shutterbugphotos") || registeredEvents.includes("thewallarticleteacher") || registeredEvents.includes("thewallartworkteacher") 
+                                        || registeredEvents.includes("thewallpoetryteacher") || registeredEvents.includes("shutterbugshortvideosteacher") 
+                                        || registeredEvents.includes("shutterbugphotosteacher")) && (
                                           <NavLink to="/mysubmission" activeClassName="active"><li><FontAwesomeIcon icon={faFileAlt} /><span>My Submissions</span></li></NavLink>
                                         )
                                     }

@@ -76,6 +76,63 @@ export function AuthProvider({ children }) {
     })
   }
 
+  function createTeacher(email, password, name,phone_number,file) {
+    return new Promise((resolve, reject) => {
+      auth.createUserWithEmailAndPassword(email, password).then(function(result) {
+        const user = auth.currentUser;
+        user.updateProfile({
+          displayName: name,
+
+        }).then(()=>{
+          var fileExt = file.name.split('.').pop();
+          console.log(user.uid+'.'+fileExt)
+          storageRef.child(user.uid+'.'+fileExt).put(file).then(()=>{
+            storageRef.child(user.uid+'.'+fileExt).getDownloadURL()
+            .then((url) => {
+              db.collection("users").doc(user.uid).set({
+                displayName:name,
+                uid:user.uid,
+                email:email,
+                phoneNumber:phone_number,
+                isTeacher:true,
+                photoURL:url
+              }).then(()=>{
+                resolve()
+              }).catch(error => reject("error creating profile"));
+            }).catch(error => reject(error));
+          }).catch(error => reject(error));
+        })
+      }).catch(error => reject(error));
+    })
+  }
+
+  function teacherLogin(email, password) {
+    return new Promise((resolve, reject) => {
+      db.collection("users").where("email","==",email).where("isTeacher", '==', true).onSnapshot((docs)=>{
+        if(!docs.empty)
+        {
+          docs.forEach(doc=>{
+            if(doc.exists)
+          {
+                auth.signInWithEmailAndPassword(email, password).then(() => {
+                  resolve()
+                })
+                .catch(error => reject(error));
+          }
+          else
+          {
+            reject({message:"no such account exists"})
+          }
+          })
+        }
+        else
+        {
+          reject({message:"no such account exists"})
+        }
+      })
+    })
+  }
+
   function logout() {
     sessionStorage.clear();  
         setCurrentUser()
@@ -123,8 +180,10 @@ export function AuthProvider({ children }) {
   const value = {
     currentUser,
     createUser,
+    createTeacher,
     logout,
-    login
+    login,
+    teacherLogin
   }
 
   return (

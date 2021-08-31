@@ -431,7 +431,58 @@ function SubmissionForm(props) {
                     </Form>
                 )}
 
+                {props?.eventData?.id==="shutterbugphotosteacher" &&(
+                    <Form onSubmit={submitShutterBug}>
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Label>Submission 1 </Form.Label>
+                            <Form.Control type="url" placeholder="Enter drive link" ref={shutterbug1Ref} required />
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Label>Submission 2</Form.Label>
+                            <Form.Control type="url" placeholder="Enter drive link" ref={shutterbug2Ref}/>
+                        </Form.Group>
+                        
+                        {error && (<div className="text-danger my-4">{error}</div>)}
+                        <Button variant="dark" type="submit">
+                            
+                            {loading?(
+                                        <Spinner variant="light" animation="border" role="status">
+                                           
+                                          </Spinner>):(
+                                            <>
+                                             Submit
+                                            </>
+                                        )}
+                        </Button>
+                    </Form>
+                )}
+
                 {props?.eventData?.id==="thewallarticle" &&(
+                    <Form onSubmit={submitArticle}>
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Label>Submission 1 </Form.Label>
+                            <Form.Control type="url" placeholder="Enter drive link" ref={article1Ref} required />
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Label>Submission 2</Form.Label>
+                            <Form.Control type="url" placeholder="Enter drive link" ref={article2Ref}/>
+                        </Form.Group>
+                        
+                        {error && (<div className="text-danger my-4">{error}</div>)}
+                        <Button variant="dark" type="submit">
+                            
+                            {loading?(
+                                        <Spinner variant="light" animation="border" role="status">
+                                           
+                                          </Spinner>):(
+                                            <>
+                                             Submit
+                                            </>
+                                        )}
+                        </Button>
+                    </Form>
+                )}
+                {props?.eventData?.id==="thewallarticleteacher" &&(
                     <Form onSubmit={submitArticle}>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Submission 1 </Form.Label>
@@ -482,8 +533,58 @@ function SubmissionForm(props) {
                         </Button>
                     </Form>
                 )}
+                {props?.eventData?.id==="thewallartworkteacher" &&(
+                    <Form onSubmit={submitArtwork}>
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Label>Submission 1 </Form.Label>
+                            <Form.Control type="url" placeholder="Enter drive link" ref={artwork1Ref} required />
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Label>Submission 2</Form.Label>
+                            <Form.Control type="url" placeholder="Enter drive link" ref={artwork2Ref}/>
+                        </Form.Group>
+                        
+                        {error && (<div className="text-danger my-4">{error}</div>)}
+                        <Button variant="dark" type="submit">
+                            
+                            {loading?(
+                                        <Spinner variant="light" animation="border" role="status">
+                                           
+                                          </Spinner>):(
+                                            <>
+                                             Submit
+                                            </>
+                                        )}
+                        </Button>
+                    </Form>
+                )}
 
                 {props?.eventData?.id==="thewallpoetry" &&(
+                    <Form onSubmit={submitPoetry}>
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Label>Submission 1 </Form.Label>
+                            <Form.Control type="url" placeholder="Enter drive link" ref={poetry1Ref} required />
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Label>Submission 2</Form.Label>
+                            <Form.Control type="url" placeholder="Enter drive link" ref={poetry2Ref}/>
+                        </Form.Group>
+                        
+                        {error && (<div className="text-danger my-4">{error}</div>)}
+                        <Button variant="dark" type="submit">
+                            
+                            {loading?(
+                                        <Spinner variant="light" animation="border" role="status">
+                                           
+                                          </Spinner>):(
+                                            <>
+                                             Submit
+                                            </>
+                                        )}
+                        </Button>
+                    </Form>
+                )}
+                {props?.eventData?.id==="thewallpoetryteacher" &&(
                     <Form onSubmit={submitPoetry}>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Submission 1 </Form.Label>

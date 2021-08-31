@@ -90,6 +90,42 @@ function EventRegistrationModal(props) {
                     db.collection("events").doc(props.eventid).update({
                         participants:firebasevalue.arrayUnion(detailsJson)
                     }).then(()=>{
+                        if(member2Email.length>0){
+                            db.collection("users").where("email","==",member2Email).get().then((doc)=>{
+                                if(!doc.empty)
+                                {
+                                    db.collection("users").doc(doc.docs[0].id).update({
+                                        registeredEvents:firebasevalue.arrayUnion(props.eventid)
+                                    })
+                                }
+                            })
+                        }
+                        if(member3Email.length>0){
+                            db.collection("users").where("email","==",member3Email).get().then((doc)=>{
+                                if(!doc.empty)
+                                {
+                                    db.collection("users").doc(doc.docs[0].id).update({
+                                        registeredEvents:firebasevalue.arrayUnion(props.eventid)
+                                    })
+                                }
+                            })
+                        }
+                        if(member4Email.length>0){
+                            db.collection("users").where("email","==",member4Email).get().then((doc)=>{
+                                if(!doc.empty)
+                                {
+                                    db.collection("users").doc(doc.docs[0].id).update({
+                                        registeredEvents:firebasevalue.arrayUnion(props.eventid)
+                                    })
+                                }
+                            })
+                        }
+
+                        
+
+
+
+
                         setLoading(false)
                         setChecked(false)
                         setError('')

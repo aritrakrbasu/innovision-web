@@ -43,6 +43,9 @@ export function AuthProvider({ children }) {
 
             })
           })
+          .catch(error => reject(error));
+
+            
         })
   } 
 

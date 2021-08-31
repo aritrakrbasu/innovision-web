@@ -23,11 +23,11 @@ function Navbar() {
 						<button class="navigation__button">About </button>
 					</Link>
 				</li>
-				{/* <li>
+				<li>
                     <Link to="/team">
 						<button class="navigation__button">The Team</button>
 					</Link>
-				</li> */}
+				</li>
 				<li>
                     <Link to="/login">
 						<button class="navigation__button">Login</button>

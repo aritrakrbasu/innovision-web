@@ -236,6 +236,7 @@ function AdminDashboard() {
                                                 <td>
                                                     {submission.hasOwnProperty("submission1Link") ? submission.submission1Link:''}
                                                     <br/>
+                                                    <br/>
                                                     {submission.hasOwnProperty("submission2Link") ? submission.submission2Link:''}
                                                 </td>
                                             </tr>)

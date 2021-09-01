@@ -64,8 +64,9 @@ function Mysubmission() {
                                                     <h5>{(submission ==='shutterbugshortvideos' || submission ==='shutterbugshortvideosteacher') && "Reel Lens"} </h5>
                                                     <h5>{(submission ==='shutterbugphotos' || submission ==='shutterbugphotosteacher') && "Shutterbug"} </h5>
                                                     <br></br>
-                                                    <p>{currentUser.submitted[submission].submission1Link}</p>  
-                                                    <p> {currentUser.submitted[submission].submission2Link}</p>   
+                                                    <p>{currentUser.submitted[submission].submission1Link && (<a href={currentUser.submitted[submission].submission1Link} target="_blank">{currentUser.submitted[submission].submission1Link}</a>)}</p>  
+
+                                                    <p>{currentUser.submitted[submission].submission2Link && (<a href={currentUser.submitted[submission].submission2Link} target="_blank">{currentUser.submitted[submission].submission2Link}</a>)}</p>   
                                                 </div>
                                             </>)
                                         })):(

@@ -123,7 +123,7 @@ function Dashboard() {
                                     {
                                         
                                     }
-                                    if( registeredEvents.includes(event.id))
+                                    if(!event.isEnded && registeredEvents.includes(event.id))
                                     {
                                         if(event.id === "thewallarticle"|| event.id === "thewallartwork"||event.id === "thewallpoetry"||event.id ==="shutterbugshortvideos"||event.id ==="shutterbugphotos")
                                         {
@@ -243,7 +243,7 @@ function Dashboard() {
                                                         <div className="item-name">{event.name}</div>
                                                         <h3 className="item-creator">{event.type}</h3>
                                                         
-                                                        <Button className="event_register" onClick={()=>handleShow(event)}> <span class="major">Register</span> </Button>
+                                                        <Button className="event_register" onClick={()=>handleShow(event)} disabled={event.isEnded}> <span class="major">{event.isEnded ? "Closed" : "Register"}</span> </Button>
                                                     </div>
                                                 </Col>
                                             )

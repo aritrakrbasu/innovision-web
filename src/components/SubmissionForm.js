@@ -15,6 +15,8 @@ function SubmissionForm(props) {
     const artwork1Ref = useRef()
     const poetry1Ref = useRef()
     const poetry2Ref = useRef()
+    const webifyGithub = useRef()
+    const websiteUrl = useRef()
     const [error, setError] = useState()
     const [loading, setLoading] = useState()
 
@@ -368,6 +370,68 @@ function SubmissionForm(props) {
             }
     }
 
+    function webifySubmission(e)
+    {
+        e.preventDefault();
+        setLoading(true)
+        setError()
+        if(websiteUrl.current.value.length>0)
+        {
+            if(websiteUrl.current.value === webifyGithub.current.value)
+            {
+                setLoading(false)
+                setError("Both Links can't be same")
+                return
+            }
+        }
+            if(websiteUrl.current.value.length>0)
+            {
+                db.collection("events").doc(props.eventData.id).update({
+                        submission :firebasevalue.arrayUnion({
+                            webifyGithub:webifyGithub.current.value,
+                            websiteUrl:websiteUrl.current.value,
+                        submittedBy : currentUser.uid,
+                        submittedByName:currentUser.displayName
+                    })
+                }).then(()=>{
+                        db.collection("users").doc(currentUser.uid).update({
+                            [`submitted.`+props.eventData.id] : {
+                                eventId : props.eventData.id,
+                                webifyGithub:webifyGithub.current.value,
+                                websiteUrl:websiteUrl.current.value,
+                            }
+                        
+                        }).then(()=>{
+                            setLoading(false)
+                            setError()
+                            props.onHide()
+                        })
+                    })
+            
+            }else
+            {
+                db.collection("events").doc(props.eventData.id).update({
+                    submission :firebasevalue.arrayUnion({
+                        webifyGithub:webifyGithub.current.value,
+                    submittedBy : currentUser.uid,
+                    submittedByName:currentUser.displayName
+                })
+                }).then(()=>{
+                        db.collection("users").doc(currentUser.uid).update({
+                            [`submitted.`+props.eventData.id] : {
+                                eventId : props.eventData.id,
+                                webifyGithub:webifyGithub.current.value,
+                            
+                        }
+                        }).then(()=>{
+                            setLoading(false)
+                            setError()
+                            props.onHide()
+                        })
+                    })
+            }
+    }
+
     
     return (
         <Modal size="lg" centered show={props.show} onHide={handleClose}>
@@ -593,6 +657,32 @@ function SubmissionForm(props) {
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Submission 2</Form.Label>
                             <Form.Control type="url" placeholder="Enter drive link" ref={poetry2Ref}/>
+                        </Form.Group>
+                        
+                        {error && (<div className="text-danger my-4">{error}</div>)}
+                        <Button variant="dark" type="submit">
+                            
+                            {loading?(
+                                        <Spinner variant="light" animation="border" role="status">
+                                           
+                                          </Spinner>):(
+                                            <>
+                                             Submit
+                                            </>
+                                        )}
+                        </Button>
+                    </Form>
+                )}
+
+                {props?.eventData?.id==="webify" &&(
+                    <Form onSubmit={webifySubmission}>
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Label>Github Link / Drive Link </Form.Label>
+                            <Form.Control type="url" placeholder="Enter github / drive link" ref={webifyGithub} required />
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Label>Live Url</Form.Label>
+                            <Form.Control type="url" placeholder="Website url" ref={websiteUrl}/>
                         </Form.Group>
                         
                         {error && (<div className="text-danger my-4">{error}</div>)}

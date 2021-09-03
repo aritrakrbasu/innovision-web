@@ -125,7 +125,7 @@ function Dashboard() {
                                     }
                                     if(!event.isEnded && registeredEvents.includes(event.id))
                                     {
-                                        if(event.id === "thewallarticle"|| event.id === "thewallartwork"||event.id === "thewallpoetry"||event.id ==="shutterbugshortvideos"||event.id ==="shutterbugphotos")
+                                        if(event.id === "thewallarticle"|| event.id === "thewallartwork"||event.id === "thewallpoetry"||event.id ==="shutterbugshortvideos"||event.id ==="shutterbugphotos"||event.id ==="webify")
                                         {
                                             return(
                                                 <Col lg={2} xs={6} md={2} className="item-container" key={index}>
